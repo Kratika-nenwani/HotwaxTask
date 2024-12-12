@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\ContactMech;
+use App\Models\Customer;
 use App\Models\OrderHeader;
 use App\Models\OrderItem;
 use App\Models\Product;
@@ -86,6 +87,8 @@ class OrderController extends Controller
             ];
         }
         $order->items=$order_items;
+        $customer=Customer::where('customer_id',$order->customer_id)->get();
+        $order->customer=$customer;
         return response()->json(['message' => 'Order Details', 'data' => $order], 200);
          
     
