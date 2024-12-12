@@ -26,13 +26,26 @@ class OrderController extends Controller
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()], 402);
         }
-        
+        $customer=Customer::where('customer_id',$request->customer_id)->first();
+        if(!$customer)
+        {
+            return response()->json(['success' => false, 'message' => 'Customer not found'], 404);
+        }
         $order=new OrderHeader();
         $order->order_date=date("Y/m/d");
         $order->customer_id=$request->customer_id;
         $order->shipping_contact_mech_id=$request->shipping_contact_mech_id;
         $order->billing_contact_mech_id=$request->billing_contact_mech_id;
-        
+        $ship=ContactMech::where('contact_mech_id',operator: $request->shipping_contact_mech_id)->first();
+        if(!$ship)
+        {
+            return response()->json(['success' => false, 'message' => 'Contact not found'], 404);
+        }
+        $shipm=ContactMech::where('contact_mech_id',operator: $request->billing_contact_mech_id)->first();
+        if(!$shipm)
+        {
+            return response()->json(['success' => false, 'message' => 'Contact not found'], 404);
+        }
         $order->save();
         $order_items = $request->order_items;
         Log::info($order_items);
@@ -40,7 +53,11 @@ class OrderController extends Controller
             
 
             foreach ($order_items as $item) {
-            
+            $product=Product::where('product_id',$item['product_id'])->first();
+            if(!$product)
+            {
+                return response()->json(['success' => false, 'message' => 'Product not found'], 404);
+            }
             $items=new OrderItem();
             $items->order_id=$order->order_id;
             $items->product_id=$item['product_id'];
@@ -153,7 +170,16 @@ class OrderController extends Controller
         {
             return response()->json(['success' => false, 'message' => 'order not found'], 404);
         } 
-        
+        $product=Product::where('product_id',$request->product_id)->first();
+        if(!$product)
+        {
+            return response()->json(['success' => false, 'message' => 'Product not found'], 404);
+        }
+        $i=OrderItem::where('order_id',$id)->where('product_id',$request->product_id)->first();
+        if($i)
+        {
+            return response()->json(['success' => false, 'message' => 'Product already available'], 404);
+        }
         $items=new OrderItem();
         $items->order_id=$id;
         $items->product_id=$request->product_id;
