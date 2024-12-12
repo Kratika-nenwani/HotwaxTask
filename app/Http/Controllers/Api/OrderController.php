@@ -110,7 +110,7 @@ class OrderController extends Controller
         $order->billing_contact_mech_id=$request->billing_contact_mech_id;
         $order->save();
 
-        return response()->json(['message' => 'Order updated successfully'], 200);
+        return response()->json(['message' => 'Order updated successfully',"order"=>$order], 200);
     } 
 
     public function delete_order($id)
