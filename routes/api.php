@@ -17,10 +17,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-  
+
     return $request->user();
 });
-  
+ 
+   
 Route::post('/orders', [OrderController::class, 'create_order']);
 Route::get('/orders/{id}', [OrderController::class, 'get_order']);
 Route::put('/orders/{id}', [OrderController::class, 'update_order']);
@@ -32,6 +33,5 @@ Route::delete('/orders/{order_id}/items/{order_item_seq_id}', [OrderController::
 
 
 Route::put('/update_contact/{id}', [OrderController::class, 'update_contact_mech']);
-
 
 Route::get('/generateSanctumToken', [TokenController::class, 'generateSanctumToken']);

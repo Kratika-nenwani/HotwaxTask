@@ -8,8 +8,6 @@ use App\Models\Customer;
 use App\Models\OrderHeader;
 use App\Models\OrderItem;
 use App\Models\Product;
-use App\Models\User;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
@@ -107,6 +105,16 @@ class OrderController extends Controller
             ]);
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()], 402);
+        }
+        $ship=ContactMech::where('contact_mech_id',operator: $request->shipping_contact_mech_id)->first();
+        if(!$ship)
+        {
+            return response()->json(['success' => false, 'message' => 'Contact not found'], 404);
+        }
+        $shipm=ContactMech::where('contact_mech_id',operator: $request->billing_contact_mech_id)->first();
+        if(!$shipm)
+        {
+            return response()->json(['success' => false, 'message' => 'Contact not found'], 404);
         }
 
         $order->shipping_contact_mech_id=$request->shipping_contact_mech_id;

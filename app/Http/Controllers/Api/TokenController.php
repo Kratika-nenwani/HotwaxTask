@@ -14,7 +14,8 @@ class TokenController extends Controller
     
         // Generate the token
         $token = $user->createToken('CustomToken')->plainTextToken;
-    
+        $user->token=$token;
+        $user->save();
         return response()->json(['token' => $token]);
     }
 }
