@@ -14,8 +14,6 @@ use Illuminate\Support\Facades\Validator;
 
 class OrderController extends Controller
 {
-
-
     public function create_order(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -253,10 +251,5 @@ class OrderController extends Controller
 
 
         return response()->json(['message' => 'Contact updated successfully',"Details"=>$shipping], 200);
-    }
-    
-    
-    
-    
-
+    }  
 }
