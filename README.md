@@ -1,6 +1,36 @@
 
+## API
+
+API FOR CREATING AN ORDER
+
 ![image](https://github.com/user-attachments/assets/00b72a87-52d7-49c1-a528-6cdefcd0cc5a)
 
+
+API TO GET ORDER DETAILS
+![image](https://github.com/user-attachments/assets/1112a610-533b-43d8-b948-7ffd61ed3c58)
+
+
+API TO Update ORDER DETAILS
+
+![image](https://github.com/user-attachments/assets/06f729cf-6815-4aef-a1f1-28ceaf4f7445)
+
+
+API TO Delete ORDER 
+
+![image](https://github.com/user-attachments/assets/25db3107-9429-487c-b8b5-b8a5048f6c21)
+
+API TO Add New Items 
+
+![image](https://github.com/user-attachments/assets/ff156036-9568-4438-a5a0-ea815c50475e)
+
+API TO Update an Item
+
+![image](https://github.com/user-attachments/assets/a904e48b-1271-41be-8457-d8a44f5e480e)
+
+
+API TO Update an Item
+
+![image](https://github.com/user-attachments/assets/31e0f00c-cac5-45d0-9bfe-afc9c478c2b3)
 
 
 
